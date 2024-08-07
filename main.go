@@ -3,6 +3,7 @@ package main
 //AIzaSyDUuELGwaUNJ-MS_eKWkKB9fNH9llgBsPM
 import (
 	GenAI "GolangGemini/pkg/google-generative-ai"
+	"GolangGemini/pkg/middleware"
 	"GolangGemini/routes"
 	"context"
 	"os"
@@ -21,6 +22,7 @@ func main() {
 	GenAI.ConnectGemini(client)
 
 	router := gin.Default()
+	router.Use(middleware.CORSMiddleware())
 	router.MaxMultipartMemory = 8 << 20 // Max file size upload
 	api := router.Group("/api")
 	{
@@ -30,8 +32,12 @@ func main() {
 			})
 		})
 	}
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	//ROUTER DEFINE
 	routes.VideoRouter(api)
 	routes.MessageRouter(api)
-	router.Run()
+	router.Run(":" + port)
 }
