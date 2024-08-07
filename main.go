@@ -28,7 +28,7 @@ func main() {
 	{
 		api.GET("/", func(ctx *gin.Context) {
 			ctx.JSON(200, gin.H{
-				"message": "Ping successful",
+				"message": "Hello from Thanh Thang",
 			})
 		})
 	}
