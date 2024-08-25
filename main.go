@@ -1,6 +1,5 @@
 package main
 
-//AIzaSyDUuELGwaUNJ-MS_eKWkKB9fNH9llgBsPM
 import (
 	GenAI "GolangGemini/pkg/google-generative-ai"
 	"GolangGemini/pkg/middleware"
